@@ -169,7 +169,7 @@ async function searchWithOpenAI(query) {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
-    signal: AbortSignal.timeout(90000),
+    signal: AbortSignal.timeout(240000),
     body: JSON.stringify({
       model: process.env.OPENAI_MODEL || "gpt-5.6-sol",
       tools: [
