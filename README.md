@@ -1,4 +1,6 @@
-# 최저가 검색 툴
+# item_price_searchingtool
+
+## 최저가 검색 툴
 
 OpenAI Responses API의 웹 검색으로 쿠팡 상품 후보를 찾고, 용량과 묶음 수량을 정규화해 단가순으로 정렬하는 로컬 웹앱입니다.
 
