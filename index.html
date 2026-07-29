@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>최저가 검색 툴</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="sidebar" aria-label="검색 및 데이터 입력">
+        <div class="brand">
+          <div class="brand-mark">₩</div>
+          <div>
+            <h1>최저가 검색 툴</h1>
+          </div>
+        </div>
+
+        <form id="searchForm" class="search-panel">
+          <label for="keyword">품목</label>
+          <div class="search-row">
+            <input
+              id="keyword"
+              type="search"
+              placeholder="검색할 상품을 입력하세요"
+              autocomplete="off"
+            />
+            <button id="searchButton" type="submit">검색</button>
+          </div>
+
+          <label class="shipping-control">
+            배송비
+            <select id="shippingMode">
+              <option value="include">포함</option>
+              <option value="exclude">제외</option>
+            </select>
+          </label>
+          <p id="searchStatus" class="hint" role="status">검색어를 입력한 뒤 검색 버튼을 눌러주세요.</p>
+          <section id="dynamicFilters" class="dynamic-filters" hidden>
+            <div class="filter-group">
+              <span class="filter-label">물품 종류</span>
+              <div id="typeFilters" class="filter-chips" aria-label="물품 종류 필터"></div>
+            </div>
+            <div class="filter-group">
+              <span class="filter-label">묶음 구성</span>
+              <div id="packageFilters" class="filter-chips" aria-label="묶음 구성 필터"></div>
+            </div>
+          </section>
+        </form>
+
+        <section class="links-panel">
+          <h2>원문 검색</h2>
+          <a id="coupangLink" target="_blank" rel="noreferrer">쿠팡에서 열기</a>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <div class="summary-bar" aria-label="분석 요약">
+          <div>
+            <span class="metric-label">분석 상품</span>
+            <strong id="totalCount">0</strong>
+          </div>
+          <div>
+            <span class="metric-label">최저 단가</span>
+            <strong id="bestUnitPrice">-</strong>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <label class="sort-control">
+            정렬
+            <select id="sortMode">
+              <option value="unitAsc">단가 낮은순</option>
+              <option value="totalAsc">총액 낮은순</option>
+              <option value="quantityDesc">총수량 많은순</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="loadingState" class="loading-state" role="status" aria-live="polite" hidden>
+          <div class="loading-spinner" aria-hidden="true"></div>
+          <div>
+            <strong>GPT-5.6 Sol이 상품을 검색하고 있습니다</strong>
+            <span>쿠팡의 가격과 묶음 구성을 비교하는 중입니다.</span>
+          </div>
+          <div class="loading-bars" aria-hidden="true">
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
+
+        <div id="results" class="results" aria-live="polite"></div>
+
+        <section class="rules">
+          <h2>분석 규칙</h2>
+          <div class="rule-grid">
+            <span>500ml × 24개</span>
+            <span>100ml당 자동 환산</span>
+            <span>쌀 10kg</span>
+            <span>100g당 자동 환산</span>
+            <span>가격 + 배송비</span>
+            <span>실결제 기준 단가 계산</span>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <template id="resultTemplate">
+      <article class="result-item">
+        <div class="rank"></div>
+        <div class="item-main">
+          <div class="item-head">
+            <span class="source"></span>
+            <h3></h3>
+          </div>
+          <div class="facts"></div>
+        </div>
+        <div class="price-block">
+          <strong class="unit-price"></strong>
+          <span class="total-price"></span>
+        </div>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
