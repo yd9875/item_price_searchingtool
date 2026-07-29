@@ -185,7 +185,7 @@ async function searchWithOpenAI(query) {
       ],
       tool_choice: "required",
       include: ["web_search_call.action.sources"],
-      reasoning: { effort: "low" },
+      reasoning: { effort: "high" },
       text: {
         verbosity: "low",
         format: {
